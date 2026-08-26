@@ -1,0 +1,32 @@
+{
+	"name": "PL_GlobalParameter_Demo",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "myFile",
+					"value": {
+						"value": "@pipeline().globalParameters.FileName",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"myFile": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-08-24T12:58:46Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

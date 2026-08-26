@@ -1,0 +1,19 @@
+{
+	"name": "Binary9",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "sample_employee.csv",
+				"fileSystem": "sample"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

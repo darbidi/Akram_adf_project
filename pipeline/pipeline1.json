@@ -1,0 +1,30 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/knkishore4899@outlook.com/Drafts/New Notebook 2026-08-05 17:51:02"
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_Databricks",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-08-11T21:02:30Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

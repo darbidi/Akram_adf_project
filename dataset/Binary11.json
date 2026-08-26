@@ -1,0 +1,19 @@
+{
+	"name": "Binary11",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "output",
+				"fileSystem": "sample"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

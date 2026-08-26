@@ -1,0 +1,52 @@
+{
+	"name": "PL_Parent_ProcessFile",
+	"properties": {
+		"activities": [
+			{
+				"name": "calling_child_pipeline",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_Child_ProcessFile",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "calling_child_pipeline",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "parentStatus",
+					"value": "Child pipeline completed successfully"
+				}
+			}
+		],
+		"variables": {
+			"parentStatus": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-08-24T12:58:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,21 @@
+{
+	"name": "adf-dataengineering-demo",
+	"properties": {
+		"globalParameters": {
+			"FileName": {
+				"type": "string",
+				"value": "sample_employee.csv"
+			}
+		},
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "westus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "976319e8-833b-47cb-aba3-ab75a368022d",
+		"tenantId": "8aa12f49-5d5c-4ca5-93e7-46187446626e"
+	}
+}
