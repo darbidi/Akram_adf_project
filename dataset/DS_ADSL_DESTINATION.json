@@ -1,0 +1,19 @@
+{
+	"name": "DS_ADSL_DESTINATION",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "sample_employee.csv",
+				"folderPath": "output",
+				"fileSystem": "sample"
+			}
+		}
+	}
+}
