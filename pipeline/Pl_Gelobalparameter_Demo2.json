@@ -1,0 +1,30 @@
+{
+	"name": "Pl_Gelobalparameter_Demo2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "myFile2",
+					"value": {
+						"value": "@pipeline().globalParameters.FileName2",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"myFile2": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
