@@ -13,6 +13,46 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/Binary3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "source"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "destination"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Binary5')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -114,6 +154,28 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_ADSL_DESTINATION')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "sample_employee.csv",
+						"folderPath": "output",
+						"fileSystem": "sample"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -159,28 +221,6 @@
 						"type": "AzureBlobFSLocation",
 						"fileName": "sample_employee.csv",
 						"folderPath": "input",
-						"fileSystem": "sample"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Binary12')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "smple_employer.csv",
-						"folderPath": "output",
 						"fileSystem": "sample"
 					}
 				}
@@ -527,7 +567,10 @@
 				"annotations": [],
 				"lastPublishTime": "2026-08-22T11:32:21Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Binary3')]",
+				"[concat(variables('factoryId'), '/datasets/Binary4')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/akram_piplinesuccesss')]",
@@ -659,7 +702,10 @@
 				"annotations": [],
 				"lastPublishTime": "2026-08-22T16:00:58Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Binary3')]",
+				"[concat(variables('factoryId'), '/datasets/Binary4')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/first_prompt')]",
@@ -783,7 +829,10 @@
 				"annotations": [],
 				"lastPublishTime": "2026-08-22T07:23:20Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Binary3')]",
+				"[concat(variables('factoryId'), '/datasets/Binary4')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/kishore_pipeline2')]",
@@ -915,7 +964,10 @@
 				"annotations": [],
 				"lastPublishTime": "2026-08-22T07:45:02Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Binary3')]",
+				"[concat(variables('factoryId'), '/datasets/Binary4')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/kishore_pipeline3')]",
@@ -1240,68 +1292,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_binary_source')]",
-				"[concat(variables('factoryId'), '/datasets/Binary12')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_Parent_ProcessFile')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "calling_child_pipeline",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"policy": {
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_Child_ProcessFile",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "Set variable1",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "calling_child_pipeline",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "parentStatus",
-							"value": "Child pipeline completed successfully"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"variables": {
-					"parentStatus": {
-						"type": "String"
-					}
-				},
-				"annotations": [],
-				"lastPublishTime": "2026-08-24T12:58:47Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_Child_ProcessFile')]"
+				"[concat(variables('factoryId'), '/datasets/ds_binary_source')]"
 			]
 		}
 	]
